@@ -22,11 +22,13 @@ namespace Lab1
     {
         Operating Opera;
         Pilkarz ThisPerson;
+        string path =  @"archiwum.txt";
         //partial oznacza że to tylko częśc implementacji klasy
         public MainWindow()
         {
             InitializeComponent();
-            Opera = new Operating(this);
+            Opera = new Operating(this, path);
+            UpdateList();
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
@@ -41,6 +43,7 @@ namespace Lab1
                 case "edit":
                     if (!AreEmpty(firstName, surname))
                     {
+                        if(ThisPerson!=null)
                         Opera.EditExisting(ThisPerson, firstName.Text,
                             surname.Text, age.Text, weight.Text);
                     }
@@ -86,7 +89,7 @@ namespace Lab1
 
         bool AreEmpty(TextBox name, TextBox sur)
         {
-            if (name.Text == "" || sur.Text=="") return true;
+            if (name.Text.Trim() == "" || sur.Text.Trim() =="") return true;
             else return false;
         }
 
@@ -107,11 +110,12 @@ namespace Lab1
                 lbi.Height = 20;
                 lbi.HorizontalAlignment = HorizontalAlignment.Left;
                 lbi.Selected += ListBoxItem_Selected;
-                lbi.Content = $"{Opera.All[i].Name} {Opera.All[i].Surname} ------ Wiek: {Opera.All[i].Age} ------- Waga: {Opera.All[i].Weight}";
-                   //               0                         1               2     3             4           5      6           7
+                lbi.Content =  $"{Opera.All[i].Name} {Opera.All[i].Surname} ------ Wiek: {Opera.All[i].Age} ------- Waga: {Opera.All[i].Weight}";
+                //               0                         1               2     3             4           5      6           7
                 listB.Items.Add(lbi);
-
             }
+            Opera.AllToFile(path, Opera.All);
+
         }
 
         private void ListBoxItem_Selected(object sender, RoutedEventArgs e)

@@ -45,5 +45,12 @@ namespace Lab1
             set { weight = value; }
         }
 
+        public string FileFormat()
+        {
+            return $"{Surname};{Name};{Age};{Weight}";
+        }
+
+
+
     }
 }
