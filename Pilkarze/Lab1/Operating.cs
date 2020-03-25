@@ -52,7 +52,7 @@ namespace Lab1
             }
         }
 
-        public static List<Pilkarz> AllFromFile(string file)
+        public List<Pilkarz> AllFromFile(string file)
         {
             List<Pilkarz> pilkarze = new List<Pilkarz>();
 
@@ -79,7 +79,7 @@ namespace Lab1
 
 
 
-        public static Pilkarz CreateFromString(string st)
+        public Pilkarz CreateFromString(string st)
         {
             string name, surname;
             int age, weight;
