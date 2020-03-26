@@ -43,17 +43,25 @@ namespace Lab1
                 case "edit":
                     if (!AreEmpty(firstName, surname))
                     {
-                        if(ThisPerson!=null)
-                        Opera.EditExisting(ThisPerson, firstName.Text,
-                            surname.Text, age.Text, weight.Text);
+                    if (ThisPerson != null)
+                       if(Opera.NotDoubled(Opera.All, new Pilkarz(firstName.Text,
+                           surname.Text, Convert.ToInt32(age.Text), Convert.ToInt32(weight.Text))))
+
+                                Opera.EditExisting(ThisPerson, firstName.Text,
+                                    surname.Text, age.Text, weight.Text);
+                        else MessageBox.Show("Taka osoba już istnieje.");
                     }
                     break;
                 case "add":
                     if(!AreEmpty(firstName, surname))
                     {
-                        Opera.AddNew(firstName.Text, surname.Text, 
-                            Convert.ToInt32(age.Text), Convert.ToInt32(weight.Text));
+                        if (Opera.NotDoubled(Opera.All, new Pilkarz(firstName.Text,
+                            surname.Text, Convert.ToInt32(age.Text), Convert.ToInt32(weight.Text))))
+                            Opera.AddNew(firstName.Text, surname.Text,
+                                Convert.ToInt32(age.Text), Convert.ToInt32(weight.Text));
+                        else MessageBox.Show("Taka osoba już istnieje.");
                     }
+
                     break;
                 case "delete":
                     if(ThisPerson!=null)
@@ -63,9 +71,6 @@ namespace Lab1
                     break;
             }
             UpdateList();
-
-            //            MessageBox.Show($"Działa button {button.Name}"); zamiast "Działa button"+button.Name
-            //            button?.
 
         }
 

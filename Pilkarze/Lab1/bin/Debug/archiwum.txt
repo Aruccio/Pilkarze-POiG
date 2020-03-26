@@ -1,6 +1,6 @@
 Kasparov;Lidya;21;53
 Jakubiec;Aga;21;45
 Winnicka;Alicja;39;80
-Winnicka;Alicja;39;80
-Winnicka;Alicja;39;80
-Winnicka;Alicja;39;80
+Aruccio;Say;25;60
+Aruccio;Lidya;20;70
+Aruccio;Say;28;60

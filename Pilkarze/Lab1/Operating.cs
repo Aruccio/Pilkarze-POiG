@@ -23,16 +23,38 @@ namespace Lab1
 
         public void AddNew(string name, string surname, int age, int weight)
         {
-            Pilkarz p = new Pilkarz(name, surname, age, weight);
-            pilkarze.Add(p);
+            if(IsOk(age, weight))
+            {
+                Pilkarz p = new Pilkarz(name, surname, age, weight);
+                pilkarze.Add(p);
+            }
+
         }
 
         public void EditExisting(Pilkarz p,string name, string surname, string age, string weight)
         {
-            p.Name = name;
-            p.Surname = surname;
-            p.Age = Convert.ToInt32(age);
-            p.Weight = Convert.ToInt32(weight);
+            if (IsOk(Convert.ToInt32(age), Convert.ToInt32(weight)))
+            {
+                p.Name = name;
+                p.Surname = surname;
+                p.Age = Convert.ToInt32(age);
+                p.Weight = Convert.ToInt32(weight);
+            }
+        }
+
+        public bool NotDoubled(List<Pilkarz> list, Pilkarz d)//istniejący i sprawdzany
+        {
+            bool temp = true;
+            for(int i=0; i<list.Count; i++)
+            {
+                if (list[i].Surname == d.Surname && list[i].Age == d.Age 
+                    && list[i].Name == d.Name && list[i].Weight == d.Weight)
+                {
+                    temp = false;
+                    break;
+                }
+            }
+            return temp;
         }
 
         public List<Pilkarz> All
@@ -90,10 +112,19 @@ namespace Lab1
                 name = pilk[1];
                 age = int.Parse(pilk[2]);
                 weight = int.Parse(pilk[3]);
-
-                return new Pilkarz(name, surname, age, weight);
+                if (IsOk(age, weight))
+                {
+                    return new Pilkarz(name, surname, age, weight);
+                }
+                throw new Exception("Niezgodny wiek lub waga");
             }
             throw new Exception("Błędny format danych z pliku");
+        }
+
+        bool IsOk(int age, int weight)
+        {
+            if (age >= 0 && age <= 100 && weight >= 10 && weight <= 120) return true;
+            else return false;
         }
 
     }
